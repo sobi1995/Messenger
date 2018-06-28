@@ -1,0 +1,340 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <style>
+        /**
+            FONTS
+        **/
+        .menu-item-link, .page-title, .page-text-content, h1, p {
+            font-family: "Cuprum";
+        }
+
+        .site-header, .menu-toggle {
+            position: relative;
+        }
+
+        .site-header-fixed {
+            position: fixed;
+            width: 100%;
+        }
+
+        .site-header .header-content {
+            display: flex;
+            padding: 25px;
+            justify-content: space-between;
+        }
+
+        .menu-toggle {
+            cursor: pointer;
+            width: 30px;
+            height: 15px;
+        }
+
+            .menu-toggle .menu-bar {
+                display: block;
+                width: 100%;
+                height: 3px;
+                background: #000;
+                position: absolute;
+            }
+
+                .menu-toggle .menu-bar:first-child {
+                    top: 0;
+                    transition: opacity 0.5s linear;
+                }
+
+                .menu-toggle .menu-bar:last-child {
+                    bottom: 0;
+                    transition: opacity 0.5s linear;
+                }
+
+                .menu-toggle .menu-bar:nth-child(2), .menu-toggle .menu-bar:nth-child(3) {
+                    -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    top: 50%;
+                    transition: -webkit-transform 0.3s ease-in;
+                    transition: transform 0.3s ease-in;
+                    transition: transform 0.3s ease-in, -webkit-transform 0.3s ease-in;
+                }
+            /** STATES **/
+            .menu-toggle.active .menu-bar {
+                background: #ffffff;
+            }
+
+                .menu-toggle.active .menu-bar:first-child, .menu-toggle.active .menu-bar:last-child {
+                    opacity: 0;
+                }
+
+                .menu-toggle.active .menu-bar:nth-child(2) {
+                    -webkit-transform: rotate(45deg);
+                    transform: rotate(45deg);
+                }
+
+                .menu-toggle.active .menu-bar:nth-child(3) {
+                    -webkit-transform: rotate(-45deg);
+                    transform: rotate(-45deg);
+                }
+
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            transition: -webkit-transform 1s cubic-bezier(.32,.92,0,1.02);
+            transition: transform 1s cubic-bezier(.32,.92,0,1.02);
+            transition: transform 1s cubic-bezier(.32,.92,0,1.02), -webkit-transform 1s cubic-bezier(.32,.92,0,1.02);
+        }
+
+            .site-nav:before {
+                -webkit-transform-origin: 0px 0px;
+                transform-origin: 0px 0px;
+                -webkit-transform: skew(-10deg);
+                transform: skew(-10deg);
+                position: absolute;
+                top: 0;
+                left: -25px;
+                width: 300px;
+                background: rgba(0, 0, 0, 0.9);
+                content: "";
+                display: block;
+                height: 100vh;
+                z-index: 0;
+            }
+
+        @media screen and (min-width: 992px) {
+        }
+
+        .site-nav-right {
+            left: initial;
+            right: -300px;
+        }
+
+            .site-nav-right:before {
+                -webkit-transform: skew(10deg);
+                transform: skew(10deg);
+                left: initial;
+                right: -25px;
+            }
+
+            .site-nav-right .menu-item {
+                text-align: right;
+            }
+
+        .site-nav .site-menu {
+            position: relative;
+            z-index: 1;
+            padding: 0;
+            margin: 50px 0 0;
+            list-style: none;
+        }
+
+            .site-nav .site-menu .menu-item-link {
+                font-family: "Cuprum";
+                text-transform: uppercase;
+                font-size: 1.5em;
+                color: #ffffff;
+                display: inline-block;
+                padding: 10px 25px;
+            }
+
+                .site-nav .site-menu .menu-item-link, .site-nav .site-menu .menu-item-link:hover {
+                    text-decoration: none;
+                }
+
+                    .site-nav .site-menu .menu-item-link:hover {
+                        background: #ffffff;
+                        color: #000;
+                    }
+
+        /** ACTIVE OR OPENED STATE **/
+
+        .site-nav.active {
+            -webkit-transform: translateX(300px);
+            transform: translateX(300px);
+        }
+
+        .site-nav-right.active {
+            -webkit-transform: translateX(-300px);
+            transform: translateX(-300px);
+        }
+
+        .site-main-area {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            align-items: center;
+            background: #fefefe;
+        }
+
+        .page-title, .page-text-content {
+            text-align: center;
+            color: #1c1c1;
+        }
+
+        .page-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+        }
+
+            .page-section:nth-child(even) {
+                background: #050e02;
+            }
+
+                .page-section:nth-child(even) .page-title, .page-section:nth-child(even) .page-text-content {
+                    color: #95f2f1;
+                }
+
+        .fullpage {
+            height: 100vh;
+            width: 100vw;
+            max-width: 100%;
+        }
+
+        .page-row {
+            padding: 54px 180px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header site-header-fixed">
+        <nav class="site-nav" id="main-nav">
+            <ul class="site-menu" id="main-menu">
+                <li class="menu-item">
+                    <a href="#home" class="menu-item-link">
+                        Home
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#about" class="menu-item-link">
+                        About
+                    </a>
+                </li>
+            
+           
+            </ul>
+        </nav>
+        <aside class="site-nav site-nav-right" id="subscribe-area">
+            <ul class="site-menu" id="subscribe-menu">
+                <li class="menu-item">
+                    <a href="sobhan.plus.plus@gmail.com" class="menu-item-link">
+                       Email 
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="https://t.me/S_22_m" class="menu-item-link">
+                        telegram
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" class="menu-item-link">
+                        LinkedIn
+                    </a>
+                </li>
+              
+            </ul>
+        </aside>
+        <div class="header-content" id="header-content">
+            <div class="menu-toggle" data-target="#main-nav">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </div>
+            <div class="logo-holder" id="logo-area"></div>
+            <div class="menu-toggle toggle-right" data-target="#subscribe-area">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </div>
+        </div>
+    </header>
+    <main class="site-main-area" id="main-area">
+        <section class="page-section fullpage banner page-header" id="home">
+            <h1 class="page-title">
+                به نام خدا
+            </h1>
+            <p class="page-text-content">
+                دوستان عزیز توجه فرماید پروژه به صورت کامل پیاده سازی نشده است ولی  چهار چوب پروژه اماده و میتوان آن را در صورت تمایل کامل نماید
+            </p>
+            <br />
+            <p class="page-text-content">
+             همچنین دوستان عزیز میتوانند در صورت هرگونه سوال  یا پیشنهاد آن را با من درمیان بگزارند
+            </p>
+            <p class="page-text-content">
+                برای نمایش  وب سرویس ها بر رویه لینک زیر کلیک کنید
+                <br />
+                <a href="http://localhost:49223/swagger/">Api View</a>
+            </p>
+        </section>
+        <section class="page-section page-row" id="about">
+            <h1 class="section-title page-title">
+                About
+            </h1>
+            <p class="page-text-content">
+                Sobhan Mozafari
+            </p>
+            <p class="page-text-content">
+                Email <a href="sobhan.plus.plus@gmail.com">sobhan.plus.plus@gmail.com</a>
+                <br />
+                Telegram <a href="https://t.me/S_22_m">https://t.me/S_22_m</a>
+      
+            </p>
+        </section>
+     
+    </main>
+
+</body>
+</html>
+
+<script>
+    function activate_target(e, a, t) {
+        //close_menu();
+        a = jQuery(this);
+        var t = a.data('target');
+        close_other_menu(a);
+        if (a.hasClass('active')) {
+            a.removeClass('active');
+            jQuery(t).removeClass('active');
+
+        } else {
+            a.addClass('active');
+            jQuery(t).addClass('active');
+        }
+
+        //close_menu(e,jQuery(this));
+        //close_menu(e,[]);
+
+    }
+    function close_other_menu(a, b, c) {
+        b = jQuery('.menu-toggle').not(a);
+        console.log("a: " + a);
+        c = b.data('target');
+        if (b.hasClass('active')) {
+            b.removeClass('active');
+            jQuery(c).removeClass('active');
+        }
+    }
+    function close_menu(evt) {
+        var $menu_toggles = jQuery('.menu-toggle');
+        if ($menu_toggles.hasClass('active')) {
+            $menu_toggles
+                .removeClass('active')
+                .each(function () {
+                    var $target = jQuery(this).data('target');
+                    jQuery($target).removeClass('active');
+                });
+        }
+    }
+
+    (function ($) {
+        $(window).scroll(close_menu);
+        $('.menu-toggle').click(activate_target);
+        $('.site-menu > li > a').click(close_menu);
+
+    })(jQuery);
+</script>

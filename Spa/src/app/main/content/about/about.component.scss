@@ -1,0 +1,132 @@
+body {
+    background-color: #FDFDFD;
+    overflow-x: hidden;
+  }
+  h1,h2,h3,h4 {
+    font-family: 'Josefin Slab', serif;
+  }
+  h5,h6,p,a {
+    font-family: 'Quattrocento', serif;
+  }
+  .material-icons.md-18 { font-size: 18px; }
+  .material-icons.md-24 { font-size: 24px; }
+  .material-icons.md-36 { font-size: 36px; }
+  .material-icons.md-48 { font-size: 48px; }
+
+/* Animations */
+/*   @-webkit-keyframes preload {
+      0%, 50% {
+          opacity: 1
+      }
+      100% {
+          opacity: 0
+      }
+  }
+  @keyframes preload {
+      0%, 50% {
+          opacity: 1
+      }
+      100% {
+          opacity: 0
+      }
+  }
+  @-webkit-keyframes appear {
+      0%, 50% {
+          opacity: 0
+      }
+      100% {
+          opacity: 1
+      }
+  }
+  @keyframes appear {
+      0%, 50% {
+          opacity: 0
+      }
+      100% {
+          opacity: 1
+      }
+  } */
+
+/* Preloader */
+  #preloader {
+    position: absolute;
+    z-index: 9999;
+    -webkit-animation: preload 5s;
+    animation: preload 5s
+  }
+  
+  main, .navbar, #principal, #about, #portfolio, #contact, footer {
+    -webkit-animation: appear 5s;
+    animation: appear 5s
+  }
+
+/* navbar */
+  nav {
+    background-color: #089CCC;
+  }
+
+/* principal */
+  #principal {
+    background-color: #000;
+  }
+  #principal video {
+    opacity: 0.6;
+    margin-bottom: -0.4rem;
+  }
+  #particles-js {
+      position: absolute;
+      z-index: 5;
+      width: 90%;
+      height: 90%;
+  }
+
+/* about */
+  #about .container {
+    margin-top: -3rem;
+    width: 90%;
+  }
+  #about img {
+    border-radius: 50%;
+  }
+  #about ul > li h4 {
+    text-decoration: underline;
+  }
+
+/* portfolio */
+  #portfolio {
+    background-image: url('https://images.unsplash.com/photo-1497091071254-cc9b2ba7c48a?dpr=1&auto=format&fit=crop&w=1080&h=717&q=80&cs=tinysrgb&crop=');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  #portfolio .container {
+    background: rgba(255,255,255,0.7);
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+  #portfolio h1 {
+    font-size: 3rem;
+  }
+  #portfolio img {
+    width: 90%;
+    padding: 0 5%;
+  }
+  #portfolio img#Sablod {
+    margin-top: -4rem;
+  }
+
+/* contact */
+  #contact .form-header,
+  #contact .btn {
+    background-color: #089CCC;
+  }
+
+/* copyright */
+  footer {
+    width: 100%;
+    padding: 4rem 0;
+    background-color: #089CCC;
+  }

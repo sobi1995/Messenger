@@ -1,0 +1,50 @@
+<div id="chat" class="page-layout carded fullwidth">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg mat-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- CONTENT CARD -->
+        <div class="content-card" style="margin-top: -28px">
+
+            <mat-sidenav-container>
+
+                <!-- LEFT SIDENAV -->
+                <mat-sidenav class="sidenav" align="start" opened="true" mode="side"
+                             fuseMatSidenavHelper="chat-left-sidenav" mat-is-locked-open="gt-md">
+                    <fuse-chat-left-sidenav></fuse-chat-left-sidenav>
+                </mat-sidenav>
+                <!-- / LEFT SIDENAV -->
+
+                <!-- CONTENT -->
+                <fuse-chat-start *ngIf="!selectedChat"></fuse-chat-start>
+
+                <fuse-chat-view *ngIf="selectedChat"></fuse-chat-view>
+                <!-- / CONTENT -->
+
+                <!-- RIGHT SIDENAV -->
+                <mat-sidenav class="sidenav" align="end" opened="false" mode="over"
+                             fuseMatSidenavHelper="chat-right-sidenav">
+                    <fuse-chat-right-sidenav></fuse-chat-right-sidenav>
+                </mat-sidenav>
+                <!-- / RIGHT SIDENAV -->
+
+            </mat-sidenav-container>
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+<!-- ADD CONTACT BUTTON -->
+<!-- <button mat-fab class="mat-accent-bg" id="add-contact-button" (click)="newContact()" aria-label="add contact"
+        *fuseIfOnDom [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+    <mat-icon>person_add</mat-icon>
+</button> -->
+<!-- / ADD CONTACT BUTTON -->
+
+</div>

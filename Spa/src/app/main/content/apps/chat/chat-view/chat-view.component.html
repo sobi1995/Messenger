@@ -1,0 +1,127 @@
+<!-- CHAT -->
+<div class="chat" fxFlex fxLayout="column">
+
+    <!-- CHAT TOOLBAR -->
+    <mat-toolbar class="chat-toolbar">
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <!-- RESPONSIVE CHATS BUTTON-->
+                <div mat-button fxHide.gt-md class="responsive-chats-button mat-icon-button mr-16"
+                     fuseMatSidenavToggler="chat-left-sidenav"
+                     aria-label="chats button">
+                    <mat-icon class="s-36">chat</mat-icon>
+                </div>
+                <!-- / RESPONSIVE CHATS BUTTON-->
+
+                <!-- CHAT CONTACT-->
+                <div class="chat-contact" fxLayout="row" fxLayoutAlign="start center"
+                     fuseMatSidenavToggler="chat-right-sidenav" (click)="selectContact()">
+
+                    <div class="avatar-wrapper">
+
+                        <img src="http://localhost:49223/images/{{contact.avatar}}"
+                             class="avatar"
+                             alt="{{contact.name}}"
+                             onerror="this.src='http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.hi.png';"/>
+
+                        <mat-icon class="s-16 status"
+                                  [ngClass]="contact.status">
+                        </mat-icon>
+                    </div>
+
+                    <div class="chat-contact-name">
+                        {{contact.name}}
+                    </div>
+
+                </div>
+                <!-- / CHAT CONTACT-->
+            </div>
+
+            <div>
+                <button mat-button class="mat-icon-button" [matMenuTriggerFor]="contactMenu"
+                        aria-label="more">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+
+                <mat-menu #contactMenu="matMenu">
+                    <button mat-menu-item fuseMatSidenavToggler="chat-right-sidenav" (click)="selectContact()">
+                        Contact Info
+                    </button>
+                </mat-menu>
+            </div>
+
+        </div>
+    </mat-toolbar>
+    <!-- / CHAT TOOLBAR -->
+
+    <!-- CHAT CONTENT -->
+    <div id="chat-content" fxFlex fusePerfectScrollbar>
+
+        <!-- CHAT MESSAGES -->
+        <div class="chat-messages">
+
+            <!-- MESSAGE -->
+            <div fxLayout="row" *ngFor="let message of dialog;let i = index" class="message-row"
+                 [ngClass]="{'user' :message.who === user.id}">
+             
+                <img *ngIf="message.who === contact.id"
+
+                     src="http://localhost:49223/images/{{contact.avatar}}"
+                     class="avatar"
+                     alt="{{contact.name}}"
+                     onerror="this.src='http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.hi.png';"/>
+
+                <img *ngIf="message.who ===user.id" class="avatar" src="http://localhost:49223/images/{{user.avatar}}" onerror="this.src='http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.hi.png';">
+             
+                <div class="bubble" >
+                    <div class="message">{{message.message }} <div id="p{{message.id}}">{{message.read | SeenPipe:message.id:message.who:selectedChat.chatId }}</div>
+<!-- <p>message.read: {{message.read }}</p>
+<p>message.id: {{message.id }}</p>
+<p>message.who: {{message.who }}</p>
+<p>selectedChat.chatId: {{selectedChat.chatId }}</p> -->
+                
+                    </div>
+                    <div class="time secondary-text">{{message.time | date:'medium'}}</div>
+                </div>
+
+            </div>
+            <!-- / MESSAGE -->
+
+        </div>
+        <!-- CHAT MESSAGES -->
+
+    </div>
+    <!-- / CHAT CONTENT -->
+
+    <!-- CHAT FOOTER -->
+    <div class="chat-footer" fxLayout="row" fxLayoutAlign="center center">
+
+        <!-- REPLY FORM -->
+        <form #replyForm="ngForm"
+              (ngSubmit)="reply($event)"
+              (keyup.enter)="reply($event)"
+              fxFlex class="reply-form"
+              fxLayout="row"
+              fxLayoutAlign="start center">
+
+            <mat-form-field class="" fxFlex floatPlaceholder="never">
+               
+                <textarea matInput #replyInput placeholder="Type and hit enter to send message"
+                          ngModel name="message"></textarea>
+            </mat-form-field>
+
+            <button mat-fab class="" type="submit" aria-label="Send message">
+                <mat-icon>send</mat-icon>
+            </button>
+            <!-- <button mat-fab class="" type="submit" aria-label="Send message">
+                <mat-icon>send</mat-icon>
+            </button> -->
+        </form>
+        <!-- / REPLY FORM -->
+    </div>
+    <!-- / CHAT FOOTER-->
+</div>
+<!-- / CHAT -->

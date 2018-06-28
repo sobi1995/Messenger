@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20180508183411_f123.cs" />
+    <Compile Remove="Migrations\20180511182932_vvv000.cs" />
+    <Compile Remove="Migrations\20180512180106_m201.cs" />
+    <Compile Remove="Migrations\20180512180404_m.cs" />
+    <Compile Remove="Migrations\20180512184148_m.cs" />
+    <Compile Remove="Migrations\20180512185324_m.cs" />
+    <Compile Remove="Migrations\20180522173431_init25.cs" />
+    <Compile Remove="Migrations\20180522173533_init25.cs" />
+    <Compile Remove="Migrations\20180523191301_0000.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DomainClasses\DomainClasses.csproj" />
+  </ItemGroup>
+
+</Project>
